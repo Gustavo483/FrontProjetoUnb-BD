@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.ImgBackgroud{
+    background: url("/src/assets/img/Instituto de Biologia UnB (4).jpg");
+    background-size: cover;
+}
+
+.backgroud{
+    height: 100vh;
+    background:rgba(23, 28, 33, 0.6)
+}
+
+.displayNone{
+    display: none;
+}
+.container{
+    width: 90%;
+    margin: 0 auto;
+}
