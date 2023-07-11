@@ -2,6 +2,7 @@
 import {onMounted, reactive} from "vue";
 import useAuthenticationController from "@/controllers/AuthenticationController";
 const {authenticationValidation, errors, getUsuario, usuario, updateUsuario} = useAuthenticationController()
+import NavBar from "@/components/NavBar.vue";
 const props = defineProps({
   blFeed:{
     required:true,
@@ -16,6 +17,9 @@ onMounted(() => {
 </script>
 
 <template>
+  <div>
+    <nav-bar></nav-bar>
+  </div>
   <div class="">
     <div class="">
       <section class="">

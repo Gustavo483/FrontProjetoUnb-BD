@@ -6,6 +6,83 @@
     background: url("/src/assets/img/Instituto de Biologia UnB (4).jpg");
     background-size: cover;
 }
+.teste{
+    border: 1px solid #5b21b6;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 3px 0px 50px -33px rgba(0,0,0,0.1);
+}
+
+.DivAvaliacao{
+    margin-top: 30px;
+    margin-bottom: 30px;
+    border-radius: 10px;
+    border: 1px solid #5b21b6;
+    /*box-shadow: 12px 17px 57px -31px #5b21b6;*/
+}
+.flexMostrarAvaliacoes{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexAvaliacao{
+    display: flex;
+}
+.tamanhoEstrela{
+    width: 20px;
+    height: 20px;
+}
+.tamanhoImagemAvaliacao{
+    border-radius: 50%;
+    width: 80px;
+    height: 80px;
+}
+.border12{
+    border: 1px solid red;
+}
+.divRelative{
+    position: relative;
+}
+.divAbsolut{
+    position: absolute;
+    bottom:15px;
+}
+.tituloAvaliacao{
+    padding: 10px;
+    font-size: 18px;
+    box-shadow: 12px 17px 57px -31px #5b21b6;
+    background: #5b21b6;
+    border-radius: 10px 10px 0 0;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.flexBtn{
+    display: flex;
+    justify-content: center;
+}
+.none{
+    display: none;
+}
+.flex1{
+    display: flex;
+    justify-content: space-around;
+}
+.espaco{
+    padding: 10px;
+}
+.formulario{
+    margin-top: 50px;
+    box-shadow: 4px 6px 50px 18px rgba(0,0,0,0.1);
+    border-radius: 15px;
+}
+.tamanho123{
+    width: 40%;
+}
+.tamanho1233{
+    width: 15%;
+}
 
 .backgroud{
     height: 100vh;
@@ -15,7 +92,33 @@
 .displayNone{
     display: none;
 }
+
 .container{
     width: 90%;
     margin: 0 auto;
 }
+.flex1{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.tamanhoDivHome{
+    width: 650px;
+}
+.titleHome{
+    font-size: 35px;
+    font-weight: bolder;
+}
+.linkAvaliar{
+    text-align: center;
+    color: white;
+    display: block;
+    width: 150px;
+    padding: 10px;
+    border-radius: 10px;
+    font-size: 17px;
+}
+
+
