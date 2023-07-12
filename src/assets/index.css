@@ -13,6 +13,12 @@
     box-shadow: 3px 0px 50px -33px rgba(0,0,0,0.1);
 }
 
+.shadow{
+    box-shadow: 12px 17px 57px -31px #5b21b6;
+    margin: 20px;
+    border-radius: 10px;
+}
+
 .DivAvaliacao{
     margin-top: 30px;
     margin-bottom: 30px;

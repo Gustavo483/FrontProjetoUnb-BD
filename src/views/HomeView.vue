@@ -24,7 +24,7 @@ import {RouterLink} from 'vue-router'
       <div class="tamanhoDivHome">
         <p class="titleHome text-center">Avalie também seu professor</p>
         <div class="flex1 mt-3">
-          <RouterLink class="linkAvaliar dark:bg-violet-800" to="/avaliarTurmas">Avaliar professor</RouterLink>
+          <RouterLink class="linkAvaliar dark:bg-violet-800" to="/avaliarProfessor">Avaliar professor</RouterLink>
         </div>
       </div>
       <div class="tamanhoDivHome">

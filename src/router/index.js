@@ -5,7 +5,9 @@ import Profile from '../views/Authentication/profile.vue'
 import Register from '../views/Authentication/register.vue'
 import teste from '../views/Authentication/teste.vue'
 import avaliarTurmas from '../views/Avaliation/avaliarTurmas.vue'
-import ListarAvaliacoes from '../views/Avaliation/listarAvaliacoes.vue'
+import listarAvaliacoes from '../views/Avaliation/listarAvaliacoes.vue'
+import listarAvaliacoesProfessores from '../views/Avaliation/listarAvaliacoesProfessores.vue'
+import avaliarProfessor from '../views/Avaliation/avaliarProfessor.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -43,9 +45,19 @@ const router = createRouter({
       component: avaliarTurmas
     },
     {
-      path: '/ListarAvaliacoes',
-      name: 'ListarAvaliacoes',
-      component: ListarAvaliacoes
+      path: '/listarAvaliacoes',
+      name: 'listarAvaliacoes',
+      component: listarAvaliacoes
+    },
+    {
+      path: '/avaliarProfessor',
+      name: 'avaliarProfessor',
+      component: avaliarProfessor
+    },
+    {
+      path: '/listarAvaliacoesProfessores',
+      name: 'listarAvaliacoesProfessores',
+      component: listarAvaliacoesProfessores
     }
   ]
 })

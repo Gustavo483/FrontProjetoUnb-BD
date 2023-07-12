@@ -11,6 +11,9 @@ export default function useAuthenticationController() {
     const router = useRouter();
     const Authentication = ref([]);
 
+    const reload = async  () => {
+        window.location.reload();
+    }
     const verificarLogin = async () => {
         if (localStorage.getItem('token')) {
             Authentication.value = 1
@@ -100,5 +103,6 @@ export default function useAuthenticationController() {
         login,
         errors,
         usuario,
+        reload
     };
 }
