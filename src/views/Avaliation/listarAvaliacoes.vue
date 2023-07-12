@@ -30,7 +30,7 @@ onMounted(() => {
       <div v-for="turma in turmas">
         <div class="p-4" v-if="turma.id_turma === idturma.id_turma && turma.st_avaliacao" >
           <div class="flexMostrarAvaliacoes">
-            <div class="flexAvaliacao">
+            <div class="flex">
               <div class="p-2">
                 <img class="tamanhoImagemAvaliacao" src="/src/assets/img/img2.jpg">
               </div>

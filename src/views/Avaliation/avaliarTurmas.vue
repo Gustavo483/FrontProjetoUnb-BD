@@ -5,12 +5,13 @@ import AvaliacaoController from "@/controllers/AvaliacaoController";
 import {RouterLink} from 'vue-router'
 import {onMounted, reactive} from "vue";
 const {authenticationValidation} = useAuthenticationController()
-const {getDepartamentos,getDisciplinas, departamentos, disciplinas, buscarTurmas, turmas,idTurmas,AbrirModal, CadastrarAvaliacao} = AvaliacaoController()
+const {getDepartamentos,getDisciplinas, departamentos, disciplinas, buscarTurmas, turmas,idTurmas,AbrirModal, CadastrarAvaliacao,denunciar} = AvaliacaoController()
 
 
 onMounted(() => {
   authenticationValidation();
   getDepartamentos();
+  VerificarAdmin()
 });
 const form = reactive({
   id_codDisciplina:"",
@@ -67,7 +68,6 @@ const form = reactive({
             Professor: {{idturma.st_nomeProfessor}}
           </div>
           <div class="AdicionarComentario">
-            <!-- Modal toggle -->
             <button @click="AbrirModal(idturma.id_turma)" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
@@ -75,59 +75,67 @@ const form = reactive({
             </button>
           </div>
         </div>
+        <div v-bind:id="idturma.id_turma" class="p-6 space-y-6 none">
+          <form class="space-y-4 md:space-y-6" @submit.prevent="CadastrarAvaliacao(idturma.id_turma)">
+            <div class="none" id="id_turma"></div>
+            <div>
+              <label for="st_avaliacao" class="block mb-2 text-sm font-medium text-gray-900 ">Comentário</label>
+              <input v-bind:id="'st_avaliacao'+idturma.id_turma" type="text" placeholder="Digite sua Avaliação" class="border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+            </div>
+            <div>
+              <label for="int_estrelas" class="block mb-2 text-sm font-medium text-gray-900 ">Estrelas</label>
+              <input v-bind:id="'int_estrelas'+idturma.id_turma" type="number" placeholder="Digite de um a 5 sua avaliação" class=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+            </div>
+            <div class="flexBtn">
+              <button type="submit" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-blue-800">Enviar Avaliação</button>
+            </div>
+          </form>
+        </div>
         <div v-for="turma in turmas">
-          <div v-bind:id="turma.id_turma" class="p-6 space-y-6 none">
-            <form class="space-y-4 md:space-y-6" @submit.prevent="CadastrarAvaliacao(turma.id_turma)">
-              <div class="none" id="id_turma"></div>
-              <div>
-                <label for="st_avaliacao" class="block mb-2 text-sm font-medium text-gray-900 ">Comentário</label>
-                <input v-bind:id="'st_avaliacao'+turma.id_turma" type="text" placeholder="Digite sua Avaliação" class="border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-              </div>
-              <div>
-                <label for="int_estrelas" class="block mb-2 text-sm font-medium text-gray-900 ">Estrelas</label>
-                <input v-bind:id="'int_estrelas'+turma.id_turma" type="number" placeholder="Digite de um a 5 sua avaliação" class=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-              </div>
-              <div class="flexBtn">
-                <button type="submit" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-blue-800">Enviar Avaliação</button>
-              </div>
-            </form>
-          </div>
           <div class="p-4" v-if="turma.id_turma === idturma.id_turma && turma.st_avaliacao" >
             <div class="flexAvaliacao">
-              <div class="p-2">
-                <img class="tamanhoImagemAvaliacao" src="/src/assets/img/img2.jpg">
+              <div class="flex">
+                <div class="p-2 ">
+                  <img class="tamanhoImagemAvaliacao" src="/src/assets/img/img2.jpg">
+                </div>
+                <div class="divRelative">
+                  <div class="p-2">
+                    {{turma.st_avaliacao}}
+                  </div>
+                  <div class="divAbsolut">
+                    <div class="flex" v-if="turma.int_estrelas === 1">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                    </div>
+                    <div class="flex" v-if="turma.int_estrelas === 2">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                    </div>
+                    <div class="flex" v-if="turma.int_estrelas === 3">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                    </div>
+                    <div class="flex" v-if="turma.int_estrelas === 4">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                    </div>
+                    <div class="flex" v-if="turma.int_estrelas === 5">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="divRelative">
-                <div class="p-2">
-                  {{turma.st_avaliacao}}
-                </div>
-                <div class="divAbsolut">
-                  <div class="flex" v-if="turma.int_estrelas === 1">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                  </div>
-                  <div class="flex" v-if="turma.int_estrelas === 2">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                  </div>
-                  <div class="flex" v-if="turma.int_estrelas === 3">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                  </div>
-                  <div class="flex" v-if="turma.int_estrelas === 4">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                  </div>
-                  <div class="flex" v-if="turma.int_estrelas === 5">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                  </div>
-                </div>
+              <button v-if="! turma.id_denuncia" class="p-5 ButtonDenunciar" @click="denunciar(turma.id_avaliacao)" >
+                Denuncias comentário
+              </button>
+              <div v-if="turma.id_denuncia" class="p-5 Analise">
+                Comentário em análise
               </div>
             </div>
           </div>

@@ -1,10 +1,11 @@
 <script setup>
 import useAuthenticationController from "@/controllers/AuthenticationController";
-const {logout,Authentication,verificarLogin} = useAuthenticationController()
+const {logout,Authentication,verificarLogin, verificarAdmin, admin} = useAuthenticationController()
 import {RouterLink} from 'vue-router'
 import {onMounted} from "vue";
 onMounted(() => {
   verificarLogin();
+  verificarAdmin()
 });
 </script>
 
@@ -24,6 +25,9 @@ onMounted(() => {
             <ul class="font-medium flex flex-col p-4 md:p-0 mt-4 border border-violet-100 rounded-lg bg-violet-50 md:flex-row md:space-x-8 md:mt-0 md:border-0 md:bg-white dark:bg-violet-800 md:dark:bg-violet-800 dark:border-violet-700">
               <li>
                 <RouterLink v-if="Authentication" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/">Home</RouterLink>
+              </li>
+              <li>
+                <RouterLink v-if="admin" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/denuncias">Denuncias</RouterLink>
               </li>
               <li>
                 <RouterLink v-if="!Authentication" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/login/0">login</RouterLink>

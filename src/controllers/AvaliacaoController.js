@@ -20,6 +20,14 @@ export default function useAuthenticationController() {
         const response = await axios.get("getAllDepartamento")
         departamentos.value = response.data.departamentos
     }
+
+    const  denunciar = async ($id_avaliacao) => {
+        await axios.post('denunciarAvaliacao/'+$id_avaliacao)
+        var buscarDisciplina = document.getElementById('buscarDisciplina')
+        buscarDisciplina.click()
+        console.log('denuncia cadastrada com sucesso')
+    }
+
     const getDisciplinas = async () => {
         var select = document.getElementById('id_codDepartamento')
         var value = select.options[select.selectedIndex].value;
@@ -27,6 +35,7 @@ export default function useAuthenticationController() {
         disciplinas.value = response.data.disciplinas
     }
     const AbrirModal = async ($id_turma) => {
+        console.log($id_turma)
         var div = document.getElementById($id_turma)
         div.classList.toggle('none')
         div.classList.toggle('shadow')
@@ -175,7 +184,7 @@ export default function useAuthenticationController() {
         CadastrarAvaliacaoProfessor,
         getAvaliacoesProfessoresUsuario,
         UpdateAvaliacaoProfessor,
-        EditarAvaliacaoProfessor
-
+        EditarAvaliacaoProfessor,
+        denunciar
     };
 }

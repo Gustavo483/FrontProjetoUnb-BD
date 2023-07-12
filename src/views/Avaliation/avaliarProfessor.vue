@@ -65,7 +65,7 @@ onMounted(() => {
         </div>
         <div v-for="avaliacao in avaliacoes">
           <div class="p-4" v-if="avaliacao.st_nomeProfessor === professor.st_nomeProfessor && avaliacao.st_avaliacao" >
-            <div class="flexAvaliacao">
+            <div class="flex">
               <div class="p-2">
                 <img class="tamanhoImagemAvaliacao" src="/src/assets/img/img2.jpg">
               </div>

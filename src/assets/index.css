@@ -18,6 +18,9 @@
     margin: 20px;
     border-radius: 10px;
 }
+.border123{
+    border: 1px solid red;
+}
 
 .DivAvaliacao{
     margin-top: 30px;
@@ -33,6 +36,18 @@
 }
 .flexAvaliacao{
     display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.Analise{
+    color: orange;
+}
+.ButtonDenunciar{
+    padding: 10px;
+    color: white;
+    border-radius: 10px;
+    background: #ef4d4d;
 }
 .tamanhoEstrela{
     width: 20px;
@@ -46,6 +61,34 @@
 .border12{
     border: 1px solid red;
 }
+
+.btnIgnorar{
+    padding: 10px;
+    margin: 5px;
+    background: aquamarine;
+    border-radius: 10px;
+    color:green;
+}
+.btnRemoverComentario{
+    padding: 10px;
+    margin: 5px;
+    background: #7b7bfd;
+    border-radius: 10px;
+    color:white;
+}
+.btnRemoverAluno{
+    padding: 10px;
+    margin: 5px;
+    background: #fc4d6e;
+    border-radius: 10px;
+    color:white;
+}
+.cabecalho{
+    background: #fa849a;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+}
 .divRelative{
     position: relative;
 }
@@ -53,6 +96,11 @@
     position: absolute;
     bottom:15px;
 }
+.flexOptions{
+    display: flex;
+    justify-content: center;
+}
+
 .tituloAvaliacao{
     padding: 10px;
     font-size: 18px;

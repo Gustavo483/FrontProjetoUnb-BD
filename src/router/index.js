@@ -8,6 +8,7 @@ import avaliarTurmas from '../views/Avaliation/avaliarTurmas.vue'
 import listarAvaliacoes from '../views/Avaliation/listarAvaliacoes.vue'
 import listarAvaliacoesProfessores from '../views/Avaliation/listarAvaliacoesProfessores.vue'
 import avaliarProfessor from '../views/Avaliation/avaliarProfessor.vue'
+import denuncias from '../views/adminViews/denuncias.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -58,6 +59,11 @@ const router = createRouter({
       path: '/listarAvaliacoesProfessores',
       name: 'listarAvaliacoesProfessores',
       component: listarAvaliacoesProfessores
+    },
+    {
+      path: '/denuncias',
+      name: 'denuncias',
+      component: denuncias
     }
   ]
 })
