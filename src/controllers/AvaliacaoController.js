@@ -26,20 +26,26 @@ export default function useAuthenticationController() {
         const response = await axios.get("getDisciplinas/"+ value)
         disciplinas.value = response.data.disciplinas
     }
-    const AbrirModal = async ($id_turma,$st_nomeDisciplina,$st_turma) => {
-        var btn = document.getElementById('BotaoModel')
-        var inputIdTurma = document.getElementById('id_turma')
-        document.getElementById('TituloAvaliacao').innerText = 'Avaliação da turma '+$st_turma
-        document.getElementById('TituloAvaliacao2').innerText = 'disciplina: '+$st_nomeDisciplina
-        inputIdTurma.innerText = $id_turma
-        btn.click()
+    const AbrirModal = async ($id_turma) => {
+        var div = document.getElementById($id_turma)
+        div.classList.toggle('none')
+        div.classList.toggle('shadow')
     }
-    const CadastrarAvaliacao = async (data) => {
-        var inputIdTurma = document.getElementById('id_turma')
-        var id_turma = inputIdTurma.innerHTML
-        await axios.post("criarAvaliacao/" + id_turma, data)
+    const CadastrarAvaliacao = async ($id_turma) => {
+        var st_avaliacaoEditar =document.getElementById('st_avaliacao'+$id_turma)
+        var int_estrelasEditar =document.getElementById('int_estrelas'+$id_turma)
+        var data = {
+            "id_turma": $id_turma,
+            "st_avaliacao": st_avaliacaoEditar.value,
+            "int_estrelas": int_estrelasEditar.value,
+        }
+        await axios.post("criarAvaliacao", data)
+        st_avaliacaoEditar.value = ''
+        int_estrelasEditar.value = ''
         var buscarDisciplina = document.getElementById('buscarDisciplina')
         buscarDisciplina.click()
+        AbrirModal($id_turma)
+
     }
     const getAvaliacoesUsuario = async () => {
         const response = await axios.get('getAvaliacoesUsuario/')
@@ -59,26 +65,27 @@ export default function useAuthenticationController() {
         var btn = document.getElementById('btnModalEdit')
         btn.click()
     }
-    const EditarAvaliacao = async($int_estrelas,$st_avaliacao, $id_avaliacao,$st_turma,$st_nomeDisciplina) => {
-        var btn = document.getElementById('btnModalEdit')
-        document.getElementById('TituloAvaliacao').innerText = 'Avaliação da turma '+$st_turma
-        document.getElementById('TituloAvaliacao2').innerText = 'disciplina: '+$st_nomeDisciplina
-        document.getElementById('id_avaliacao').innerText =$id_avaliacao
-        document.getElementById('st_avaliacaoEditar').value =$st_avaliacao
-        document.getElementById('int_estrelasEditar').value =$int_estrelas
-        btn.click()
+    const EditarAvaliacao = async($id_avaliacao,$st_avaliacao,$int_estrelas) => {
+        var div = document.getElementById('DivEdidAvaliacao'+$id_avaliacao)
+        div.classList.toggle('none')
+        div.classList.toggle('shadow')
+        document.getElementById('st_avaliacaoEditar'+$id_avaliacao).value =$st_avaliacao
+        document.getElementById('int_estrelasEditar'+$id_avaliacao).value =$int_estrelas
     }
-    const UpdadateAvaliacao = async () => {
-        var id_avaliacao = document.getElementById('id_avaliacao').innerHTML
-        var st_avaliacaoEditar =document.getElementById('st_avaliacaoEditar').value
-        var int_estrelasEditar =document.getElementById('int_estrelasEditar').value
+    const UpdadateAvaliacao = async ($id_avaliacao) => {
+
+        var st_avaliacaoEditar =document.getElementById('st_avaliacaoEditar'+$id_avaliacao).value
+        var int_estrelasEditar =document.getElementById('int_estrelasEditar'+$id_avaliacao).value
         var data = {
-            "id_avaliacao": id_avaliacao,
+            "id_avaliacao": $id_avaliacao,
             "st_avaliacao": st_avaliacaoEditar,
             "int_estrelas": int_estrelasEditar,
         }
         await axios.put("updateAvaliacao", data)
         getAvaliacoesUsuario()
+        var div = document.getElementById('DivEdidAvaliacao'+$id_avaliacao)
+        div.classList.toggle('none')
+        div.classList.toggle('shadow')
     }
 
     const buscarProfessores = async () => {

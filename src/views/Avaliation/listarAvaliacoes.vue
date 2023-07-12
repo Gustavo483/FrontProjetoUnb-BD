@@ -19,50 +19,6 @@ onMounted(() => {
     <nav-bar></nav-bar>
   </div>
 
-  <!-- Modal toggle -->
-  <button id="btnModalEdit" data-modal-target="staticModal" data-modal-toggle="staticModal" class="none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-    Botão Cadastro avaliação
-  </button>
-
-  <!-- Main modal -->
-  <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-    <div class="relative w-full max-w-2xl max-h-full">
-      <!-- Modal content -->
-      <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-        <!-- Modal header -->
-        <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-          <div>
-            <h3 id="TituloAvaliacao" class="text-xl font-semibold text-gray-900 dark:text-white"></h3>
-            <h3 id="TituloAvaliacao2" class="text-xl font-semibold text-gray-900 dark:text-white"></h3>
-          </div>
-          <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
-            <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-              <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-            </svg>
-            <span class="sr-only">Fechar modal</span>
-          </button>
-        </div>
-        <!-- Modal body -->
-        <div class="p-6 space-y-6">
-          <form class="space-y-4 md:space-y-6" @submit.prevent="UpdadateAvaliacao()">
-            <div class="none" id="id_avaliacao"></div>
-            <div>
-              <label for="st_avaliacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comentário</label>
-              <input type="text" id="st_avaliacaoEditar" placeholder="Digite sua Avaliação" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-            </div>
-            <div>
-              <label for="int_estrelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estrelas</label>
-              <input type="number" id="int_estrelasEditar" placeholder="Digite de um a 5 sua avaliação" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-            </div>
-            <div class="flexBtn">
-              <button data-modal-hide="staticModal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">Atualizar Dados</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-  </div>
-
   <div class=" container LinkTurmas mb-20">
     <div class="DivAvaliacao" v-for="idturma in idTurmas">
       <div class="tituloAvaliacao">
@@ -113,7 +69,7 @@ onMounted(() => {
             </div>
             <div class="flex">
               <div class="pe-2">
-                <div @click="EditarAvaliacao(turma.int_estrelas,turma.st_avaliacao, turma.id_avaliacao,turma.st_turma,turma.st_nomeDisciplina)">
+                <div @click="EditarAvaliacao(turma.id_avaliacao,turma.st_avaliacao, turma.int_estrelas)">
                   <svg xmlns="http://www.w3.org/2000/svg" width="28" height="28" fill="blue" class="bi bi-pen" viewBox="0 0 16 16">
                     <path d="m13.498.795.149-.149a1.207 1.207 0 1 1 1.707 1.708l-.149.148a1.5 1.5 0 0 1-.059 2.059L4.854 14.854a.5.5 0 0 1-.233.131l-4 1a.5.5 0 0 1-.606-.606l1-4a.5.5 0 0 1 .131-.232l9.642-9.642a.5.5 0 0 0-.642.056L6.854 4.854a.5.5 0 1 1-.708-.708L9.44.854A1.5 1.5 0 0 1 11.5.796a1.5 1.5 0 0 1 1.998-.001zm-.644.766a.5.5 0 0 0-.707 0L1.95 11.756l-.764 3.057 3.057-.764L14.44 3.854a.5.5 0 0 0 0-.708l-1.585-1.585z"/>
                   </svg>
@@ -125,6 +81,22 @@ onMounted(() => {
                 </svg>
               </div>
             </div>
+          </div>
+          <div v-bind:id="'DivEdidAvaliacao'+turma.id_avaliacao" class="p-6 space-y-6 none">
+            <form class="space-y-4 md:space-y-6" @submit.prevent="UpdadateAvaliacao(turma.id_avaliacao)">
+              <div class="none" id="id_avaliacao"></div>
+              <div>
+                <label for="st_avaliacao" class="block mb-2 text-sm font-medium text-gray-900">Comentário</label>
+                <input type="text"  v-bind:id="'st_avaliacaoEditar'+turma.id_avaliacao" placeholder="Digite sua Avaliação" class="sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+              </div>
+              <div>
+                <label for="int_estrelas" class="block mb-2 text-sm font-medium text-gray-900">Estrelas</label>
+                <input type="number"  v-bind:id="'int_estrelasEditar'+turma.id_avaliacao" placeholder="Digite de um a 5 sua avaliação" class="sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+              </div>
+              <div class="flexBtn">
+                <button type="submit" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-blue-800">Editar avaliação</button>
+              </div>
+            </form>
           </div>
         </div>
       </div>

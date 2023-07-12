@@ -59,7 +59,7 @@ onMounted(() => {
               <input v-bind:id="'int_estrelas'+professor.st_nomeProfessor" type="number" placeholder="Digite de 1 a 5 sua avaliação" class="sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:border-gray-600 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
             </div>
             <div class="flexBtn">
-              <button data-modal-hide="staticModal" type="submit" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-blue-800">Enviar Avaliação</button>
+              <button type="submit" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-blue-800">Enviar Avaliação</button>
             </div>
           </form>
         </div>

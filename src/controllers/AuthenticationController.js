@@ -67,8 +67,9 @@ export default function useAuthenticationController() {
     }
 
     const updateUsuario = async (id) => {
+        console.log(id)
         try {
-            await axios.put("uptadeUsuario/" + id, usuario.value)
+            await axios.put("updateUsuario/" + id, usuario.value)
             errors.value = ''
             await router.push({name: "profile", params: {blFeed: 1}})
         } catch (error) {

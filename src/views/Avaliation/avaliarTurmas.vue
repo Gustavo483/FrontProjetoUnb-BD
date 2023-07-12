@@ -17,10 +17,6 @@ const form = reactive({
   st_periodoletivo:"",
 })
 
-const formSalvarAvaliacao = reactive({
-  st_avaliacao: "",
-  int_estrelas: ""
-})
 </script>
 
 <template>
@@ -62,49 +58,6 @@ const formSalvarAvaliacao = reactive({
         </div>
       </form>
     </div>
-    <!-- Modal toggle -->
-    <button id="BotaoModel" data-modal-target="staticModal" data-modal-toggle="staticModal" class="none text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" type="button">
-      Botão Cadastro avaliação
-    </button>
-
-    <!-- Main modal -->
-    <div id="staticModal" data-modal-backdrop="static" tabindex="-1" aria-hidden="true" class="fixed top-0 left-0 right-0 z-50 hidden w-full p-4 overflow-x-hidden overflow-y-auto md:inset-0 h-[calc(100%-1rem)] max-h-full">
-      <div class="relative w-full max-w-2xl max-h-full">
-        <!-- Modal content -->
-        <div class="relative bg-white rounded-lg shadow dark:bg-gray-700">
-          <!-- Modal header -->
-          <div class="flex items-start justify-between p-4 border-b rounded-t dark:border-gray-600">
-            <div>
-              <h3 id="TituloAvaliacao" class="text-xl font-semibold text-gray-900 dark:text-white"></h3>
-              <h3 id="TituloAvaliacao2" class="text-xl font-semibold text-gray-900 dark:text-white"></h3>
-            </div>
-            <button type="button" class="text-gray-400 bg-transparent hover:bg-gray-200 hover:text-gray-900 rounded-lg text-sm w-8 h-8 ml-auto inline-flex justify-center items-center dark:hover:bg-gray-600 dark:hover:text-white" data-modal-hide="staticModal">
-              <svg class="w-3 h-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 14 14">
-                <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m1 1 6 6m0 0 6 6M7 7l6-6M7 7l-6 6"/>
-              </svg>
-              <span class="sr-only">Fechar modal</span>
-            </button>
-          </div>
-          <!-- Modal body -->
-          <div class="p-6 space-y-6">
-            <form class="space-y-4 md:space-y-6" @submit.prevent="CadastrarAvaliacao(formSalvarAvaliacao)">
-              <div class="none" id="id_turma"></div>
-              <div>
-                <label for="st_avaliacao" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Comentário</label>
-                <input v-model="formSalvarAvaliacao.st_avaliacao" type="text" id="st_avaliacao" placeholder="Digite sua Avaliação" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-              </div>
-              <div>
-                <label for="int_estrelas" class="block mb-2 text-sm font-medium text-gray-900 dark:text-white">Estrelas</label>
-                <input v-model="formSalvarAvaliacao.int_estrelas" type="number" id="int_estrelas" placeholder="Digite de um a 5 sua avaliação" class="bg-gray-50 border border-gray-300 text-gray-900 sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
-              </div>
-              <div class="flexBtn">
-                <button data-modal-hide="staticModal" type="submit" class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800">I accept</button>
-              </div>
-            </form>
-          </div>
-        </div>
-      </div>
-    </div>
 
     <div class="LinkTurmas mb-20">
       <div class="DivAvaliacao" v-for="idturma in idTurmas">
@@ -115,7 +68,7 @@ const formSalvarAvaliacao = reactive({
           </div>
           <div class="AdicionarComentario">
             <!-- Modal toggle -->
-            <button @click="AbrirModal(idturma.id_turma,idturma.st_nomeDisciplina,idturma.st_turma)" type="button">
+            <button @click="AbrirModal(idturma.id_turma)" type="button">
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
                 <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
               </svg>
@@ -123,6 +76,22 @@ const formSalvarAvaliacao = reactive({
           </div>
         </div>
         <div v-for="turma in turmas">
+          <div v-bind:id="turma.id_turma" class="p-6 space-y-6 none">
+            <form class="space-y-4 md:space-y-6" @submit.prevent="CadastrarAvaliacao(turma.id_turma)">
+              <div class="none" id="id_turma"></div>
+              <div>
+                <label for="st_avaliacao" class="block mb-2 text-sm font-medium text-gray-900 ">Comentário</label>
+                <input v-bind:id="'st_avaliacao'+turma.id_turma" type="text" placeholder="Digite sua Avaliação" class="border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5  dark:placeholder-gray-400 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+              </div>
+              <div>
+                <label for="int_estrelas" class="block mb-2 text-sm font-medium text-gray-900 ">Estrelas</label>
+                <input v-bind:id="'int_estrelas'+turma.id_turma" type="number" placeholder="Digite de um a 5 sua avaliação" class=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" required="">
+              </div>
+              <div class="flexBtn">
+                <button type="submit" class="text-white bg-violet-700 hover:bg-violet-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 text-center dark:bg-violet-600 dark:hover:bg-violet-700 dark:focus:ring-blue-800">Enviar Avaliação</button>
+              </div>
+            </form>
+          </div>
           <div class="p-4" v-if="turma.id_turma === idturma.id_turma && turma.st_avaliacao" >
             <div class="flexAvaliacao">
               <div class="p-2">
