@@ -10,6 +10,12 @@ This template should help get you started developing with Vue 3 in Vite.
 
 See [Vite Configuration Reference](https://vitejs.dev/config/).
 
+
+## Passo-a-passo - Instalação do projeto 
+0. Esse repositório é responsável por gerir o frontEnd da aplicação, o backend é gerido pelo projeto https://github.com/Gustavo483/BackEndProjetoUnb-BD.git.
+1. Em sua pasta raiz, clone o arquivo do projeto usando **git clone** https://github.com/Gustavo483/FrontProjetoUnb-BD
+2. Abra a pasta do projeto em seu terminal e execute os comandos abaixo:
+3. 
 ## Project Setup
 
 ```sh
@@ -27,3 +33,5 @@ npm run dev
 ```sh
 npm run build
 ```
+
+3. Após executar os comandos desse repositório e do repositório https://github.com/Gustavo483/BackEndProjetoUnb-BD, abra seu brawser de preferencia, e coloque a url "http://127.0.0.1:3000/" e a aplicação estará funcionando.
