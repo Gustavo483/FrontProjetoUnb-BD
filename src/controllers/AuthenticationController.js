@@ -36,7 +36,7 @@ export default function useAuthenticationController() {
         let usuarioLogadoObj = JSON.parse(usuarioLogado);
 
         const notNeedPermision = ['login', 'register']
-        const needPermisionAdmin = ['denuncias']
+        const needPermisionAdmin = ['denunciasTurmas','denunciasProfessores']
         if (!usuarioLogadoObj.bl_admin && needPermisionAdmin.includes(localStorage.getItem('route'))){
             await router.push({name: "home"});
         }
@@ -55,8 +55,8 @@ export default function useAuthenticationController() {
     }
 
     const getUsuario = async () => {
-        const response = await axios.get("getUsuarioLogado")
-        usuario.value = response.data.usuario
+        let usuarioLogado = localStorage.getItem('usuario');
+        usuario.value = JSON.parse(usuarioLogado)
     }
 
     const login = async (data) => {
@@ -86,9 +86,9 @@ export default function useAuthenticationController() {
     }
 
     const updateUsuario = async (id) => {
-        console.log(id)
+       console.log(usuario.value)
         try {
-            await axios.put("updateUsuario/" + id, usuario.value)
+            await axios.post("updateUsuario/" + id, usuario.value)
             errors.value = ''
             await router.push({name: "profile", params: {blFeed: 1}})
         } catch (error) {

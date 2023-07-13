@@ -24,7 +24,7 @@ onMounted(() => {
     <div class="">
       <section class="">
         <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto md:h-screen lg:py-0">
-          <div v-if="props.blFeed == 1" id="alert-3" class="flex p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-violet-800 dark:text-green-400" role="alert">
+          <div v-if="props.blFeed == 1" id="alert-3" class="flex p-4 mb-4 text-green-800 rounded-lg bg-green-50 dark:bg-violet-800 dark:text-green-400 mt-20" role="alert">
             <svg aria-hidden="true" class="flex-shrink-0 w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fill-rule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clip-rule="evenodd"></path></svg>
             <span class="sr-only">Info</span>
             <div class="ml-3 text-sm font-medium">
@@ -56,6 +56,26 @@ onMounted(() => {
                   <div v-if="errors.email">
                     <span class="text-sm text-red-400">
                       {{ errors.email[0]}}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="st_curso" class="block mb-2 text-sm font-medium text-gray-900 ">Seu curso</label>
+                  <input v-model="usuario.st_curso" type="text" id="st_curso"  class=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                  <div v-if="errors.st_curso">
+                    <span class="text-sm text-red-400">
+                      {{ errors.st_curso[0]}}
+                    </span>
+                  </div>
+                </div>
+
+                <div>
+                  <label for="matricula" class="block mb-2 text-sm font-medium text-gray-900 ">Sua matrícula</label>
+                  <input v-model="usuario.matricula" type="number" id="matricula"  class=" border sm:text-sm rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:focus:ring-blue-500 dark:focus:border-blue-500" placeholder="name@company.com" required="">
+                  <div v-if="errors.matricula">
+                    <span class="text-sm text-red-400">
+                      {{ errors.matricula[0]}}
                     </span>
                   </div>
                 </div>

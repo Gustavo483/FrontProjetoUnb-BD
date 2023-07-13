@@ -27,7 +27,10 @@ onMounted(() => {
                 <RouterLink v-if="Authentication" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/">Home</RouterLink>
               </li>
               <li>
-                <RouterLink v-if="admin" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/denuncias">Denuncias</RouterLink>
+                <RouterLink v-if="admin" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/denunciasTurmas">Denuncias Turmas</RouterLink>
+              </li>
+              <li>
+                <RouterLink v-if="admin" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/denunciasProfessores">Denuncias Professores</RouterLink>
               </li>
               <li>
                 <RouterLink v-if="!Authentication" class="block py-2 pl-3 pr-4 text-violet-800 rounded hover:bg-violet-100 md:hover:bg-transparent md:border-0 md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-violet-700 dark:hover:text-white md:dark:hover:bg-transparent" to="/login/0">login</RouterLink>
