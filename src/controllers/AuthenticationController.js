@@ -12,6 +12,10 @@ export default function useAuthenticationController() {
     const Authentication = ref([]);
     const admin = ref([]);
 
+    /**
+     * Verifica se o perfil logado é de um usuário admin
+     * @returns {Promise<void>}
+     */
    const verificarAdmin = async  () => {
        let usuarioString = localStorage.getItem('usuario');
        let usuarioObj = JSON.parse(usuarioString);
@@ -31,6 +35,10 @@ export default function useAuthenticationController() {
         }
     }
 
+    /**
+     * Verifica a autenticação dos usuários e redireciona conforme condições
+     * @returns {Promise<void>}
+     */
     const authenticationValidation = async () => {
         let usuarioLogado = localStorage.getItem('usuario');
         let usuarioLogadoObj = JSON.parse(usuarioLogado);
@@ -49,16 +57,20 @@ export default function useAuthenticationController() {
         }
     }
 
-    const getUsuarios = async () => {
-        const response = await axios.get("teste")
-        usuarios.value = response.data.usuarios
-    }
-
+    /**
+     * Recuperao os daods do usuário logado
+     * @returns {Promise<void>}
+     */
     const getUsuario = async () => {
         let usuarioLogado = localStorage.getItem('usuario');
         usuario.value = JSON.parse(usuarioLogado)
     }
 
+    /**
+     * Realiza o login do usuário caso os dados estejam corretos
+     * @param data
+     * @returns {Promise<void>}
+     */
     const login = async (data) => {
         try {
             const response = await axios.post("login", data)
@@ -74,6 +86,11 @@ export default function useAuthenticationController() {
         }
     }
 
+    /**
+     * Registra um novo usuario na base de dados
+     * @param data
+     * @returns {Promise<void>}
+     */
     const register = async (data) => {
         try {
             await axios.post('register', data)
@@ -85,6 +102,11 @@ export default function useAuthenticationController() {
         }
     }
 
+    /**
+     * Atualiza o cadastro do usuário
+     * @param id
+     * @returns {Promise<void>}
+     */
     const updateUsuario = async (id) => {
        console.log(usuario.value)
         try {
@@ -98,6 +120,10 @@ export default function useAuthenticationController() {
         }
     }
 
+    /**
+     * Desloga o usuário
+     * @returns {Promise<void>}
+     */
     const logout = async () => {
         try {
             await axios.post("logout")
@@ -119,7 +145,6 @@ export default function useAuthenticationController() {
         register,
         Authentication,
         verificarLogin,
-        getUsuarios,
         login,
         verificarAdmin,
         admin,

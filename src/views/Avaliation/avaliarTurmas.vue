@@ -2,16 +2,13 @@
 import NavBar from "@/components/NavBar.vue";
 import useAuthenticationController from "@/controllers/AuthenticationController";
 import AvaliacaoController from "@/controllers/AvaliacaoController";
-import {RouterLink} from 'vue-router'
 import {onMounted, reactive} from "vue";
 const {authenticationValidation} = useAuthenticationController()
 const {getDepartamentos,getDisciplinas, departamentos, disciplinas, buscarTurmas, turmas,idTurmas,AbrirModal, CadastrarAvaliacao,denunciar} = AvaliacaoController()
 
-
 onMounted(() => {
   authenticationValidation();
   getDepartamentos();
-  VerificarAdmin()
 });
 const form = reactive({
   id_codDisciplina:"",
@@ -59,7 +56,6 @@ const form = reactive({
         </div>
       </form>
     </div>
-
     <div class="LinkTurmas mb-20">
       <div class="DivAvaliacao" v-for="idturma in idTurmas">
         <div class="tituloAvaliacao">

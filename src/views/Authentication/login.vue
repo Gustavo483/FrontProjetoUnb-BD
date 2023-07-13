@@ -15,7 +15,6 @@ const form = reactive({
   email: "",
   password: ""
 })
-
 </script>
 
 <template>

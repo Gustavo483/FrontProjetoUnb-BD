@@ -1,5 +1,5 @@
 <script setup>
-import {onMounted, reactive} from "vue";
+import {onMounted} from "vue";
 import useAuthenticationController from "@/controllers/AuthenticationController";
 const {authenticationValidation, errors, getUsuario, usuario, updateUsuario} = useAuthenticationController()
 import NavBar from "@/components/NavBar.vue";

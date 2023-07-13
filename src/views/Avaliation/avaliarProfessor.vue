@@ -2,10 +2,9 @@
 import NavBar from "@/components/NavBar.vue";
 import useAuthenticationController from "@/controllers/AuthenticationController";
 import AvaliacaoController from "@/controllers/AvaliacaoController";
-import {RouterLink} from 'vue-router'
-import {onMounted, reactive} from "vue";
+import {onMounted} from "vue";
 const {authenticationValidation} = useAuthenticationController()
-const {getDepartamentos, departamentos, buscarProfessores, professores,avaliacoes,abrirModalAvaliacaoProfessor, CadastrarAvaliacaoProfessor} = AvaliacaoController()
+const {getDepartamentos, departamentos, buscarProfessores, professores,avaliacoes,abrirModalAvaliacaoProfessor, CadastrarAvaliacaoProfessor,denunciarProfessor} = AvaliacaoController()
 
 onMounted(() => {
   authenticationValidation();
@@ -65,42 +64,49 @@ onMounted(() => {
         </div>
         <div v-for="avaliacao in avaliacoes">
           <div class="p-4" v-if="avaliacao.st_nomeProfessor === professor.st_nomeProfessor && avaliacao.st_avaliacao" >
-            <div class="flex">
-              <div class="p-2">
-                <img class="tamanhoImagemAvaliacao" src="/src/assets/img/img2.jpg">
+            <div class="flexAvaliacao">
+              <div class="flex">
+                <div class="p-2 ">
+                  <img class="tamanhoImagemAvaliacao" src="/src/assets/img/img2.jpg">
+                </div>
+                <div class="divRelative">
+                  <div class="p-2">
+                    {{avaliacao.st_avaliacao}}
+                  </div>
+                  <div class="divAbsolut">
+                    <div class="flex" v-if="avaliacao.int_estrelas === 1">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                    </div>
+                    <div class="flex" v-if="avaliacao.int_estrelas === 2">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                    </div>
+                    <div class="flex" v-if="avaliacao.int_estrelas === 3">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                    </div>
+                    <div class="flex" v-if="avaliacao.int_estrelas === 4">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                    </div>
+                    <div class="flex" v-if="avaliacao.int_estrelas === 5">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
+                      <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
+                    </div>
+                  </div>
+                </div>
               </div>
-              <div class="divRelative">
-                <div class="p-2">
-                  {{avaliacao.st_avaliacao}}
-                </div>
-
-                <div class="divAbsolut">
-                  <div class="flex" v-if="avaliacao.int_estrelas === 1">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                  </div>
-                  <div class="flex" v-if="avaliacao.int_estrelas === 2">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                  </div>
-                  <div class="flex" v-if="avaliacao.int_estrelas === 3">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                  </div>
-                  <div class="flex" v-if="avaliacao.int_estrelas === 4">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                  </div>
-                  <div class="flex" v-if="avaliacao.int_estrelas === 5">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png" >
-                    <img class="tamanhoEstrela" src="/src/assets/img/estrela.png">
-                  </div>
-                </div>
+              <button v-if="!avaliacao.id_denuncia" class="p-5 ButtonDenunciar" @click="denunciarProfessor(avaliacao.id_avaliacao)" >
+                Denuncias comentário
+              </button>
+              <div v-if="avaliacao.id_denuncia" class="p-5 Analise">
+                Comentário em análise
               </div>
             </div>
           </div>

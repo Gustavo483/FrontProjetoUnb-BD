@@ -3,7 +3,6 @@ import HomeView from '../views/HomeView.vue'
 import Login from '../views/Authentication/login.vue'
 import Profile from '../views/Authentication/profile.vue'
 import Register from '../views/Authentication/register.vue'
-import teste from '../views/Authentication/teste.vue'
 import avaliarTurmas from '../views/Avaliation/avaliarTurmas.vue'
 import listarAvaliacoes from '../views/Avaliation/listarAvaliacoes.vue'
 import listarAvaliacoesProfessores from '../views/Avaliation/listarAvaliacoesProfessores.vue'
@@ -35,11 +34,6 @@ const router = createRouter({
       name: 'profile',
       component: Profile,
       props: true
-    },
-    {
-      path: '/teste',
-      name: 'teste',
-      component: teste
     },
     {
       path: '/avaliarTurmas',

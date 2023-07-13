@@ -3,7 +3,7 @@ import NavBar from "@/components/NavBar.vue";
 import useAuthenticationController from "@/controllers/AuthenticationController";
 import AvaliacaoController from "@/controllers/AvaliacaoController";
 import {RouterLink} from 'vue-router'
-import {onMounted, reactive} from "vue";
+import {onMounted} from "vue";
 const {authenticationValidation} = useAuthenticationController()
 const {getAvaliacoesUsuario,turmas,idTurmas, deleteAvaliacao, EditarAvaliacao,UpdadateAvaliacao} = AvaliacaoController()
 

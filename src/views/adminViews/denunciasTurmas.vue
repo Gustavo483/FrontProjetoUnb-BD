@@ -2,8 +2,7 @@
 import NavBar from "@/components/NavBar.vue";
 import useAuthenticationController from "@/controllers/AuthenticationController";
 import AdminController from "@/controllers/AdminController";
-import {RouterLink} from 'vue-router'
-import {onMounted, reactive} from "vue";
+import {onMounted} from "vue";
 const {authenticationValidation} = useAuthenticationController()
 const {getDenuncias, denuncias, ignorarDenuncia,removerComentario,removerUsuario} = AdminController()
 
