@@ -18,14 +18,19 @@ export default function useAuthenticationController() {
      */
    const verificarAdmin = async  () => {
        let usuarioString = localStorage.getItem('usuario');
-       let usuarioObj = JSON.parse(usuarioString);
-        var bl_admin = usuarioObj.bl_admin
+       if (usuarioString){
+           let usuarioObj = JSON.parse(usuarioString);
+           var bl_admin = usuarioObj.bl_admin
 
-       if (bl_admin) {
-           admin.value = 1
-       } else {
+           if (bl_admin) {
+               admin.value = 1
+           } else {
+               admin.value = 0
+           }
+       }else{
            admin.value = 0
        }
+
    }
     const verificarLogin = async () => {
         if (localStorage.getItem('token')) {
@@ -41,11 +46,16 @@ export default function useAuthenticationController() {
      */
     const authenticationValidation = async () => {
         let usuarioLogado = localStorage.getItem('usuario');
-        let usuarioLogadoObj = JSON.parse(usuarioLogado);
+        if (usuarioLogado){
+            let usuarioLogadoObj = JSON.parse(usuarioLogado);
+            var bl_admin = usuarioLogadoObj.bl_admin ? 1 : 0
+        }else{
+            bl_admin = 0
+        }
 
         const notNeedPermision = ['login', 'register']
         const needPermisionAdmin = ['denunciasTurmas','denunciasProfessores']
-        if (!usuarioLogadoObj.bl_admin && needPermisionAdmin.includes(localStorage.getItem('route'))){
+        if (!bl_admin && needPermisionAdmin.includes(localStorage.getItem('route'))){
             await router.push({name: "home"});
         }
 
@@ -64,6 +74,7 @@ export default function useAuthenticationController() {
     const getUsuario = async () => {
         let usuarioLogado = localStorage.getItem('usuario');
         usuario.value = JSON.parse(usuarioLogado)
+        console.log(usuario)
     }
 
     /**
