@@ -28,10 +28,4 @@ npm install
 npm run dev
 ```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
 3. Após executar os comandos desse repositório e do repositório https://github.com/Gustavo483/BackEndProjetoUnb-BD, abra seu brawser de preferencia, e coloque a url "http://127.0.0.1:3000/" e a aplicação estará funcionando.
